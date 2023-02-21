@@ -18,7 +18,8 @@ let panTh = 0;
 let tilting = 0;
 let panning = 0;
 let obj;
-let img;
+let backgroundImg;
+let door2Texture;
 
 let propCam = {
   position: [0, 0, 350],
@@ -27,20 +28,22 @@ let propCam = {
 }
 
 function preload() { 
-  obj = loadModel('111.obj', true);
-  img = loadImage('img1.jpg')
+  obj = loadModel('door1.obj', true);
+  backgroundImg = loadImage('img1.jpg')
+  door2Texture = loadImage('door2_texture.png')
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   cam = createCamera();
-  cam.setPosition(0, 0, 350)
+  //orig positionZ 350
+  cam.setPosition(0, 0, 500)
   console.log(cam.eyeZ)
   //angleMode(DEGREES);
   
   objects.push(slct(0, 0, 0, "#31D2B0"))
-  objects.push(slct(80, 0, 100, "#FF9800"))
-  objects.push(slct(-100, -50, -50, "#2196F3"))
+  objects.push(slct(280, -50, 100, "#FF9800"))
+  objects.push(slct(-180, -50, 100, "#2196F3"))
   objects.push(slct(0, -75, 100, "#4CAF50"))
 
   links.push('https://tonejs.github.io/')
@@ -61,7 +64,7 @@ function draw() {
   perspective(PI/3, width/height, 350/10, 350*10)
   
   
-  //orbitControl(3)
+ orbitControl(3)
   
   //need to be deleted
   // stroke('red')
@@ -84,17 +87,17 @@ function draw() {
 
     push()
       noStroke()
-      let backgroundRotate=map(mouseX,0,width,0,0.1)
+      let backgroundRotate=map(mouseX,0,width,-0.1,0.1)
       translate(objects[0].x, objects[0].y, objects[0].z)  
       rotateY(backgroundRotate);
       if(objects[0].selected ) {
-        texture(img);
-        img.filter(INVERT)
+        texture(backgroundImg);
+        backgroundImg.filter(INVERT)
       }else {
-         texture(img);   
+         texture(backgroundImg);   
       }
-        scale(0.5)
-        box(windowWidth,windowHeight,1)
+        scale(0.78)
+        plane(windowWidth,windowHeight,1)
         
      pop()
   
@@ -103,18 +106,38 @@ function draw() {
       push()
       noStroke()
       let door1Rotate=map(mouseX,0,width,0,0.2)
-      translate(objects[1].x, objects[1].y, objects[1].z)
-      rotateZ(door1Rotate)
+      translate(objects[1].x, objects[1].y+door1Rotate, objects[1].z)
+      rotateY(door1Rotate)
       if(objects[1].selected) {
         fill(objects[1].color)
       } else {
         fill(100,100, 100)
       } 
-        scale(0.6)
+        //scale(0.6)
         model(obj)   
      pop()
 
-  
+
+    //door 2, drawn on a box
+    push()
+      noStroke()
+      let door2=map(mouseX,0,width,-0.1,0.1)
+      translate(objects[2].x, objects[2].y, objects[2].z)  
+      rotateY(door2)
+
+      let planeWidth=100
+      let planeHeight=planeWidth*2.3
+
+      if(objects[2].selected) {
+        texture(door2Texture);
+        door2Texture.filter(INVERT)
+      } else {
+        texture(door2Texture);
+      } 
+        //box(boxWidth,boxHeight,1)
+        plane(planeWidth, planeHeight);
+        
+     pop()
   
   // rectMode(CENTER)
   // push()
@@ -246,18 +269,14 @@ function vecNorm(v) {
   return [[v[0][0] / vmag, v[0][1] / vmag, v[0][2] / vmag, 1]]
 }
 
-// function mouseP{
-//   window.open("https://mail.google.com");
-// }
+
 function mousePressed() {
 
-    if(objects[0].selected==true){
-    window.open(links[0]);
-    }
-    
-    if(objects[1].selected==true){
-      window.open(links[1]);
-      }
+  for(let i=0;i<objects.length;i++){
+    if(objects[i].selected==true){
+       window.open(links[i]) 
+     }
+       }
 }
 
 
