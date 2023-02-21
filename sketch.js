@@ -10,6 +10,8 @@ function slct(x, y, z, c)  {
   )
 }
 
+let buttons=[]
+let links=[]
 let objects = []
 let tiltTh = 0;
 let panTh = 0;
@@ -30,23 +32,32 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 400, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
   cam = createCamera();
   cam.setPosition(0, 0, 350)
   console.log(cam.eyeZ)
   //angleMode(DEGREES);
   
-  objects.push(slct(0, 100, 50, "#31D2B0"))
-  objects.push(slct(100, 0, 100, "#FF9800"))
+  objects.push(slct(0, 0, 0, "#31D2B0"))
+  objects.push(slct(80, 0, 100, "#FF9800"))
   objects.push(slct(-100, -50, -50, "#2196F3"))
   objects.push(slct(0, -75, 100, "#4CAF50"))
 
+  links.push('https://tonejs.github.io/')
+  links.push('https://www.hhha.online/')
+  links.push('https://shaderific.com/glsl.html')
+  links.push('https://p5js.org/reference/#/p5/createA')
+
+
+  // for(let k=0;k<objects.length;k++){
+  //   button.position(objects[k].x,objects[k].y,objects[k].z);
+  //   button.mousePressed(openEmail[k]);  
+  // }
 }
 
 function draw() {
   background(220);
-  let rotateTheCanvas=map(mouseX,0,width,-0.1,0.1)
-  perspective(PI/3, width/height+rotateTheCanvas, 350/10, 350*10)
+  perspective(PI/3, width/height, 350/10, 350*10)
   
   
   orbitControl(3)
@@ -69,17 +80,20 @@ function draw() {
   // pop()
 
   //background
+
     push()
       noStroke()
-     
-      translate(0,0, objects[0].z)    
-      if(objects[0].selected) {
+      let backgroundRotate=map(mouseX,0,width,0,0.1)
+      translate(objects[0].x, objects[0].y, objects[0].z)  
+      rotateY(backgroundRotate);
+      if(objects[0].selected ) {
+        texture(img);
         img.filter(INVERT)
-         texture(img);   
-      } else {
+      }else {
          texture(img);   
       }
-        box(width,height,1)
+        box(windowWidth,windowHeight,1)
+        
      pop()
   
   
@@ -93,12 +107,11 @@ function draw() {
         fill(objects[1].color)
       } else {
         fill(100,100, 100)
-      }
-  
-        model(obj);   
+      } 
+        scale(0.6)
+        model(obj)   
      pop()
 
-  
   
   
   // rectMode(CENTER)
@@ -231,5 +244,18 @@ function vecNorm(v) {
   return [[v[0][0] / vmag, v[0][1] / vmag, v[0][2] / vmag, 1]]
 }
 
+// function mouseP{
+//   window.open("https://mail.google.com");
+// }
+function mousePressed() {
+
+    if(objects[0].selected==true){
+    window.open(links[0]);
+    }
+    
+    if(objects[1].selected==true){
+      window.open(links[1]);
+      }
+}
 
 
