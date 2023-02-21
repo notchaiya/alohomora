@@ -10,16 +10,23 @@ function slct(x, y, z, c)  {
   )
 }
 
-let buttons=[]
+
 let links=[]
 let objects = []
 let tiltTh = 0;
 let panTh = 0;
 let tilting = 0;
 let panning = 0;
-let obj;
+let obj1;
+let obj5;
 let backgroundImg;
+let door1Textur;
 let door2Texture;
+let door3Texture;
+let door4Texture;
+let door5Texture;
+let keyImg;
+
 
 let propCam = {
   position: [0, 0, 350],
@@ -28,9 +35,16 @@ let propCam = {
 }
 
 function preload() { 
-  obj = loadModel('door1.obj', true);
+  obj1 = loadModel('door1.obj', true);
+  obj5 = loadModel('door5.obj', true);
   backgroundImg = loadImage('img1.jpg')
+  door1Textur = loadImage('door1_texture.png')
   door2Texture = loadImage('door2_texture.png')
+  door3Texture = loadImage('door3_texture.png')
+  door4Texture = loadImage('door4_texture.png')
+  door5Texture = loadImage('door5_texture.jpg')
+  keyImg = loadImage('key.png');
+  
 }
 
 function setup() {
@@ -41,22 +55,22 @@ function setup() {
   console.log(cam.eyeZ)
   //angleMode(DEGREES);
   
-  objects.push(slct(0, 0, 0, "#31D2B0"))
-  objects.push(slct(280, -50, 100, "#FF9800"))
-  objects.push(slct(-180, -50, 100, "#2196F3"))
-  objects.push(slct(0, -75, 100, "#4CAF50"))
+  objects.push(slct(0, 0, 0, "#31D2B0"))      //background_ plane+texture
+  objects.push(slct(260, -40, 90, "#FF9800")) //door1_3D
+  objects.push(slct(-170, -90, 80, "#2196F3")) //door2_plane+texture
+  objects.push(slct(20, 80, 150, "#4CAF50"))  //door3_plane+texture
+  objects.push(slct(300,  130, 170, "#2196F3"))  //door4_plane+texture
+  objects.push(slct(-280, 100, 100, "#2196F3"))  //door5_3D
 
   links.push('https://tonejs.github.io/')
   links.push('https://www.hhha.online/')
   links.push('https://shaderific.com/glsl.html')
   links.push('https://p5js.org/reference/#/p5/createA')
+  links.push('https://openhome.cc/Gossip/P5JS/TextureMapping.html')
+  links.push('https://archive.org/details/specimensofgothi00mack/page/n127/mode/2up')
 
-  console.log(windowWidth);
-  console.log(windowHeight);
-  // for(let k=0;k<objects.length;k++){
-  //   button.position(objects[k].x,objects[k].y,objects[k].z);
-  //   button.mousePressed(openEmail[k]);  
-  // }
+
+
 }
 
 function draw() {
@@ -83,62 +97,164 @@ function draw() {
   // drawLine(0, 0, 350, (mouseX-width/2)/10, (mouseY-height/2)/10, 350 - 35)
   // pop()
 
-  //background
-
+  //----------------------background
     push()
       noStroke()
       let backgroundRotate=map(mouseX,0,width,-0.1,0.1)
       translate(objects[0].x, objects[0].y, objects[0].z)  
       rotateY(backgroundRotate);
       if(objects[0].selected ) {
-        texture(backgroundImg);
-        backgroundImg.filter(INVERT)
+        //fill(objects[0].color)
+        //sphere(20)
       }else {
-         texture(backgroundImg);   
+        //fill(0,255,0)
+        //sphere(20)
       }
+      texture(backgroundImg);   
         scale(0.78)
         plane(windowWidth,windowHeight,1)
         
      pop()
   
   
-  //door1_3D
+  //----------------------door1_3D
       push()
       noStroke()
-      let door1Rotate=map(mouseX,0,width,0,0.2)
-      translate(objects[1].x, objects[1].y+door1Rotate, objects[1].z)
+      let door1Rotate=map(mouseX,0,width,-0.7,0.5)
+      let door1MoveZ=map(mouseX,0,width,0,50)
+      translate(objects[1].x, objects[1].y, objects[1].z+door1MoveZ)
       rotateY(door1Rotate)
       if(objects[1].selected) {
         fill(objects[1].color)
+        sphere(20)
       } else {
-        fill(100,100, 100)
+        fill(0,255,0)
+      sphere(20)
+        
       } 
-        //scale(0.6)
-        model(obj)   
+      texture(door1Textur)
+        scale(1.3)
+        model(obj1)   
      pop()
 
 
-    //door 2, drawn on a box
+    //----------------------door 2, drawn on a plane
     push()
       noStroke()
-      let door2=map(mouseX,0,width,-0.1,0.1)
+      let door2Rotate=map(mouseX,0,width,-0.1,0.1)
       translate(objects[2].x, objects[2].y, objects[2].z)  
-      rotateY(door2)
-
-      let planeWidth=100
-      let planeHeight=planeWidth*2.3
-
-      if(objects[2].selected) {
+      rotateY(door2Rotate)
+      let planeWidth2=100
+      let planeHeight2=planeWidth2*2.3
+      if(objects[2].selected ) {
+        fill(objects[2].color)
+        sphere(20)
+      }else {
+        fill(0,255,0)
+        sphere(20)
+      }
+        scale(1.1)
         texture(door2Texture);
-        door2Texture.filter(INVERT)
-      } else {
-        texture(door2Texture);
-      } 
-        //box(boxWidth,boxHeight,1)
-        plane(planeWidth, planeHeight);
-        
+        plane(planeWidth2, planeHeight2);
      pop()
   
+
+
+    //----------------------door 3, drawn on a plane
+    push()
+    noStroke()
+    let door3Rotate=map(mouseX,0,width,-0.1,0.1)
+    translate(objects[3].x, objects[3].y, objects[3].z)  
+    rotateY(door3Rotate)
+    let planeWidth3=200
+    let planeHeight3=planeWidth3*1.3
+    if(objects[3].selected ) {
+      fill(objects[3].color)
+      sphere(20)
+    }else {
+      fill(0,255,0)
+      sphere(20)
+    }
+    scale(0.85)
+      texture(door3Texture);
+      plane(planeWidth3, planeHeight3);
+   pop()
+
+
+   
+   //----------------------door 4, drawn on a plane
+      push()
+      noStroke()
+      let door4Rotate=map(mouseX,0,width,-0.2,0.2)
+      translate(objects[4].x, objects[4].y, objects[4].z)  
+      rotateY(door4Rotate)
+      let planeWidth4=200
+      let planeHeight4=planeWidth3*1.2
+      if(objects[4].selected ) {
+        fill(objects[4].color)
+        sphere(20)
+      }else {
+        fill(0,255,0)
+        sphere(20)
+      }
+      scale(0.5)
+        texture(door4Texture);
+        plane(planeWidth3, planeHeight3);
+    pop()
+
+
+  //----------------------door5_3D
+  push()
+  noStroke()
+  let door5Rotate=map(mouseX,0,width,-0.3,0.3)
+  let door5MoveZ=map(mouseX,0,width,0,50)
+  translate(objects[5].x, objects[5].y, objects[5].z+door1MoveZ)
+  rotateY(door5Rotate)
+  if(objects[5].selected) {
+    fill(objects[5].color)
+    sphere(20)
+  } else {
+    fill(0,255,0)
+  sphere(20)
+    
+  } 
+    texture(door5Texture)
+    scale(0.8)
+    model(obj5)   
+ pop()
+
+     //----------------------key, fllowing the mouse
+    //  push()
+    //  noStroke()
+    //  translate(mouseX, mouseY, 100)  
+    //  let keyWidth=30
+    //  let keyHeight=keyWidth*2
+    // //  if(objects[2].selected ) {
+    // //    fill(objects[2].color)
+    // //    sphere(20)
+    // //  }else {
+    // //    fill(0,255,0)
+    // //    sphere(20)
+    // //  }
+    // //    scale(1.1)
+    //    texture(keyImg);
+    //    plane(planeWidth2, planeHeight2);
+    // pop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // rectMode(CENTER)
   // push()
   //   translate(0, 0, 350-35)
@@ -277,6 +393,7 @@ function mousePressed() {
        window.open(links[i]) 
      }
        }
+
 }
 
 
