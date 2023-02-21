@@ -28,7 +28,7 @@ let propCam = {
 
 function preload() { 
   obj = loadModel('111.obj', true);
-  img = loadImage('img1.png')
+  img = loadImage('img1.jpg')
 }
 
 function setup() {
@@ -48,7 +48,8 @@ function setup() {
   links.push('https://shaderific.com/glsl.html')
   links.push('https://p5js.org/reference/#/p5/createA')
 
-
+  console.log(windowWidth);
+  console.log(windowHeight);
   // for(let k=0;k<objects.length;k++){
   //   button.position(objects[k].x,objects[k].y,objects[k].z);
   //   button.mousePressed(openEmail[k]);  
@@ -92,6 +93,7 @@ function draw() {
       }else {
          texture(img);   
       }
+        scale(0.5)
         box(windowWidth,windowHeight,1)
         
      pop()
