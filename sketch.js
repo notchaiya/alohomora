@@ -125,14 +125,12 @@ function draw() {
       translate(objects[1].x, objects[1].y, objects[1].z+door1MoveZ)
       rotateY(door1Rotate)
       if(objects[1].selected) {
-        fill(objects[1].color)
-        sphere(20)
+        scale(1.1)
+
       } else {
-        fill(0,255,0)
-      sphere(20)
         
       } 
-      texture(door1Textur)
+        texture(door1Textur)
         scale(1.3)
         model(obj1)   
      pop()
@@ -147,11 +145,12 @@ function draw() {
       let planeWidth2=100
       let planeHeight2=planeWidth2*2.3
       if(objects[2].selected ) {
-        fill(objects[2].color)
-        sphere(20)
+        // fill(objects[2].color)
+        // sphere(20)
+        scale(1.2)
       }else {
-        fill(0,255,0)
-        sphere(20)
+        // fill(0,255,0)
+        // sphere(20)
       }
         scale(1.1)
         texture(door2Texture);
@@ -169,11 +168,12 @@ function draw() {
     let planeWidth3=200
     let planeHeight3=planeWidth3*1.3
     if(objects[3].selected ) {
-      fill(objects[3].color)
-      sphere(20)
+      // fill(objects[3].color)
+      // sphere(1)
+      scale(1.2)
     }else {
-      fill(0,255,0)
-      sphere(20)
+      // fill(0,255,0)
+      // sphere(20)
     }
     scale(0.85)
       texture(door3Texture);
@@ -188,18 +188,19 @@ function draw() {
       let door4Rotate=map(mouseX,0,width,-0.2,0.2)
       translate(objects[4].x, objects[4].y, objects[4].z)  
       rotateY(door4Rotate)
-      let planeWidth4=200
-      let planeHeight4=planeWidth3*1.2
+      let planeWidth4=70
+      let planeHeight4=planeWidth4*1.4
       if(objects[4].selected ) {
-        fill(objects[4].color)
-        sphere(20)
+        // fill(objects[3].color)
+        // sphere(1)
+        scale(1.5)
       }else {
-        fill(0,255,0)
-        sphere(20)
+        // fill(0,255,0)
+        // sphere(20)
       }
-      scale(0.5)
+      scale(1.2)
         texture(door4Texture);
-        plane(planeWidth3, planeHeight3);
+        plane(planeWidth4, planeHeight4);
     pop()
 
 
@@ -211,12 +212,13 @@ function draw() {
   translate(objects[5].x, objects[5].y, objects[5].z+door1MoveZ)
   rotateY(door5Rotate)
   if(objects[5].selected) {
-    fill(objects[5].color)
-    sphere(20)
+    // fill(objects[5].color)
+    // sphere(20)
+    scale(1.15)
   } else {
-    fill(0,255,0)
-  sphere(20)
-    
+  //   fill(0,255,0)
+  // sphere(20)
+
   } 
     texture(door5Texture)
     scale(0.8)
