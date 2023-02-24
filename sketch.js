@@ -10,7 +10,7 @@ function slct(x, y, z, c)  {
   )
 }
 
-
+let sounds = []
 let links=[]
 let objects = []
 let tiltTh = 0;
@@ -44,6 +44,15 @@ function preload() {
   door4Texture = loadImage('door4_texture.png')
   door5Texture = loadImage('door5_texture.jpg')
   keyImg = loadImage('key.png');
+
+  //sound
+  sounds.push(loadSound('soundEffects/door1.wav'));
+  sounds.push(loadSound('soundEffects/door2.wav'));
+  sounds.push(loadSound('soundEffects/door3.wav'));
+  sounds.push(loadSound('soundEffects/door4.wav'));
+  sounds.push(loadSound('soundEffects/door5.wav'));
+  
+
   
 }
 
@@ -70,7 +79,6 @@ function setup() {
   links.push('https://archive.org/details/specimensofgothi00mack/page/n127/mode/2up')
 
 
-
 }
 
 function draw() {
@@ -78,8 +86,8 @@ function draw() {
   perspective(PI/3, width/height, 350/10, 350*10)
   
   
- orbitControl(3)
-  
+  orbitControl(3)
+ 
   //need to be deleted
   // stroke('red')
   // line(0, 0, 200, 0)
@@ -126,7 +134,6 @@ function draw() {
       rotateY(door1Rotate)
       if(objects[1].selected) {
         scale(1.1)
-
       } else {
         
       } 
@@ -145,12 +152,8 @@ function draw() {
       let planeWidth2=100
       let planeHeight2=planeWidth2*2.3
       if(objects[2].selected ) {
-        // fill(objects[2].color)
-        // sphere(20)
         scale(1.2)
       }else {
-        // fill(0,255,0)
-        // sphere(20)
       }
         scale(1.1)
         texture(door2Texture);
@@ -168,12 +171,9 @@ function draw() {
     let planeWidth3=200
     let planeHeight3=planeWidth3*1.3
     if(objects[3].selected ) {
-      // fill(objects[3].color)
-      // sphere(1)
       scale(1.2)
     }else {
-      // fill(0,255,0)
-      // sphere(20)
+
     }
     scale(0.85)
       texture(door3Texture);
@@ -191,12 +191,9 @@ function draw() {
       let planeWidth4=70
       let planeHeight4=planeWidth4*1.4
       if(objects[4].selected ) {
-        // fill(objects[3].color)
-        // sphere(1)
         scale(1.5)
       }else {
-        // fill(0,255,0)
-        // sphere(20)
+
       }
       scale(1.2)
         texture(door4Texture);
@@ -212,8 +209,6 @@ function draw() {
   translate(objects[5].x, objects[5].y, objects[5].z+door1MoveZ)
   rotateY(door5Rotate)
   if(objects[5].selected) {
-    // fill(objects[5].color)
-    // sphere(20)
     scale(1.15)
   } else {
   //   fill(0,255,0)
@@ -224,33 +219,6 @@ function draw() {
     scale(0.8)
     model(obj5)   
  pop()
-
-     //----------------------key, fllowing the mouse
-    //  push()
-    //  noStroke()
-    //  translate(mouseX, mouseY, 100)  
-    //  let keyWidth=30
-    //  let keyHeight=keyWidth*2
-    // //  if(objects[2].selected ) {
-    // //    fill(objects[2].color)
-    // //    sphere(20)
-    // //  }else {
-    // //    fill(0,255,0)
-    // //    sphere(20)
-    // //  }
-    // //    scale(1.1)
-    //    texture(keyImg);
-    //    plane(planeWidth2, planeHeight2);
-    // pop()
-
-
-
-
-
-
-
-
-
 
 
 
@@ -269,8 +237,8 @@ function draw() {
     let d = dist(0, 0, 350, o.x, o.y, o.z)
     let xMag = dist(0, 0, 350, (mouseX-width/2)/10, (mouseY-height/2)/10, 350 - 35)
 
-    strokeWeight(1)
-    drawLine(0, 0, 350, (mouseX-width/2)/10 * d/xMag, (mouseY-height/2)/10 * d/xMag, 350 - 35 * d/xMag)
+    //strokeWeight(1)
+    //drawLine(0, 0, 350, (mouseX-width/2)/10 * d/xMag, (mouseY-height/2)/10 * d/xMag, 350 - 35 * d/xMag)
     push()
       translate((mouseX-width/2)/10 * d/xMag, (mouseY-height/2)/10 * d/xMag, 350 - 35 * d/xMag)
       strokeWeight(0.2)
@@ -279,9 +247,9 @@ function draw() {
       } else {
         o.selected = false;
       }
-      noFill()
-      stroke(o.color)
-      sphere(20)
+      // noFill()
+      // stroke(o.color)
+      // sphere(20)
     pop()
   }
   
@@ -389,13 +357,13 @@ function vecNorm(v) {
 
 
 function mousePressed() {
+  let randSound = random(sounds);
+
 
   for(let i=0;i<objects.length;i++){
     if(objects[i].selected==true){
-       window.open(links[i]) 
+       window.open(links[i])  
+       randSound.play();   
      }
-       }
-
 }
-
-
+}
