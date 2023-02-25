@@ -86,7 +86,7 @@ function draw() {
   perspective(PI/3, width/height, 350/10, 350*10)
   
   
-  orbitControl(3)
+  //orbitControl(3)
  
   //need to be deleted
   // stroke('red')
@@ -219,8 +219,6 @@ function draw() {
     scale(0.8)
     model(obj5)   
  pop()
-
-
 
 
 
