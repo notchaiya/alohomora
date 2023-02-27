@@ -25,7 +25,8 @@ let door2Texture;
 let door3Texture;
 let door4Texture;
 let door5Texture;
-let keyImg;
+let bird;
+let desert;
 
 
 let propCam = {
@@ -43,14 +44,13 @@ function preload() {
   door3Texture = loadImage('door3_texture.png')
   door4Texture = loadImage('door4_texture.png')
   door5Texture = loadImage('door5_texture.jpg')
-  keyImg = loadImage('key.png');
+  bird = loadImage('bird01-the-biggest.png');
+  desert= loadImage('desert.png')
 
   //sound
   sounds.push(loadSound('soundEffects/door1.wav'));
   sounds.push(loadSound('soundEffects/door2.wav'));
   sounds.push(loadSound('soundEffects/door3.wav'));
-  sounds.push(loadSound('soundEffects/door4.wav'));
-  sounds.push(loadSound('soundEffects/door5.wav'));
   
 
   
@@ -86,7 +86,7 @@ function draw() {
   perspective(PI/3, width/height, 350/10, 350*10)
   
   
-  //orbitControl(3)
+  orbitControl(3)
  
   //need to be deleted
   // stroke('red')
@@ -119,10 +119,34 @@ function draw() {
         //sphere(20)
       }
       texture(backgroundImg);   
-        scale(0.78)
+        scale(0.8)
         plane(windowWidth,windowHeight,1)
         
      pop()
+
+  //----------------------bird
+    push()
+    noStroke()
+    let birdRotate=map(mouseX,0,width,-0.1,0.1)
+    let birdMoveY=map(mouseX,0,width,0,20)
+    translate(-360, -200+birdMoveY, 90)  
+    rotateY(birdRotate);
+    texture(bird);   
+    plane(bird.width*0.5,bird.height*0.5)
+      
+   pop()
+
+  //----------------------desert
+  push()
+  noStroke()
+  let desertRotate=map(mouseX,0,width,-0.15,0.15)
+  let desertMoveY=map(mouseX,0,width,0,5)
+  translate(objects[0].x, objects[0].y+desertMoveY, objects[0].z+40)  
+  rotateY(desertRotate);
+  texture(desert);   
+  plane(desert.width*0.5,desert.height*0.5)
+    
+pop()
   
   
   //----------------------door1_3D
@@ -149,8 +173,8 @@ function draw() {
       let door2Rotate=map(mouseX,0,width,-0.1,0.1)
       translate(objects[2].x, objects[2].y, objects[2].z)  
       rotateY(door2Rotate)
-      let planeWidth2=100
-      let planeHeight2=planeWidth2*2.3
+      let planeWidth2=150
+      let planeHeight2=planeWidth2*1.3
       if(objects[2].selected ) {
         scale(1.2)
       }else {
@@ -188,8 +212,8 @@ function draw() {
       let door4Rotate=map(mouseX,0,width,-0.2,0.2)
       translate(objects[4].x, objects[4].y, objects[4].z)  
       rotateY(door4Rotate)
-      let planeWidth4=70
-      let planeHeight4=planeWidth4*1.4
+      let planeWidth4=80
+      let planeHeight4=planeWidth4*1.2
       if(objects[4].selected ) {
         scale(1.5)
       }else {
@@ -209,13 +233,13 @@ function draw() {
   translate(objects[5].x, objects[5].y, objects[5].z+door1MoveZ)
   rotateY(door5Rotate)
   if(objects[5].selected) {
+    fill(177,176,166)
     scale(1.15)
   } else {
-  //   fill(0,255,0)
+    fill(177,176,166)
   // sphere(20)
 
   } 
-    texture(door5Texture)
     scale(0.8)
     model(obj5)   
  pop()
@@ -360,8 +384,10 @@ function mousePressed() {
 
   for(let i=0;i<objects.length;i++){
     if(objects[i].selected==true){
-       window.open(links[i])  
-       randSound.play();   
+      randSound.play();   
+      //window.location.href = links[i]
+      window.open(links[i])  
+       
      }
 }
 }
