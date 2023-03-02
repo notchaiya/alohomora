@@ -79,12 +79,12 @@ function setup() {
   objects.push(slct(300,  130, 170, "#2196F3"))  //door4_plane+texture
   objects.push(slct(-280, 100, 100, "#2196F3"))  //door5_3D
 
-  links.push('https://tonejs.github.io/')
-  links.push('https://www.hhha.online/')
-  links.push('https://shaderific.com/glsl.html')
-  links.push('https://p5js.org/reference/#/p5/createA')
-  links.push('https://openhome.cc/Gossip/P5JS/TextureMapping.html')
-  links.push('https://archive.org/details/specimensofgothi00mack/page/n127/mode/2up')
+  links.push('https://juliecst.github.io/annaRoom/')
+  links.push('https://juliecst.github.io/annaRoom/')
+  links.push('https://juliecst.github.io/annaRoom/')
+  links.push('https://juliecst.github.io/annaRoom/')
+  links.push('https://juliecst.github.io/annaRoom/')
+  links.push('https://juliecst.github.io/annaRoom/')
 
 
 }
@@ -411,13 +411,23 @@ function vecNorm(v) {
 
 function mousePressed() {
   let randSound = random(sounds);
-
+  let randLink = random(sounds);
 
   for(let i=0;i<objects.length;i++){
     if(objects[i].selected==true){
-      randSound.play();   
-      window.location.href = links[i]
-      //window.open(links[i])  
+      randSound.play();
+
+      setTimeout(function() {
+
+        // Second action
+        //ellipse(200, 200, 150, 150);
+        window.location.href = links[i]
+    
+      }, 3000);
+
+      
+      // window.location.href = links[i]
+      // window.open(links[i])  
        
      }
 }
