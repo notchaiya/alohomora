@@ -1,3 +1,6 @@
+//Inspired by https://www.youtube.com/watch?v=0PCNSK5FuAg&t=141s
+//Reference: https://editor.p5js.org/rjgilmour/full/RghSL1xxo
+
 function slct(x, y, z, c)  {
   return(
     {
@@ -27,6 +30,9 @@ let door4Texture;
 let door5Texture;
 let bird;
 let desert;
+let poem1;
+let poem2;
+let key;
 
 
 let propCam = {
@@ -46,13 +52,15 @@ function preload() {
   door5Texture = loadImage('door5_texture.jpg')
   bird = loadImage('bird01-the-biggest.png');
   desert= loadImage('desert.png')
+  poem1=loadImage('poem1.png')
+  poem2=loadImage('poem2.png')
+  key=loadImage('key.png')
 
   //sound
   sounds.push(loadSound('soundEffects/door1.wav'));
   sounds.push(loadSound('soundEffects/door2.wav'));
   sounds.push(loadSound('soundEffects/door3.wav'));
   
-
   
 }
 
@@ -64,7 +72,7 @@ function setup() {
   console.log(cam.eyeZ)
   //angleMode(DEGREES);
   
-  objects.push(slct(0, 0, 0, "#31D2B0"))      //background_ plane+texture
+  objects.push(slct(0, 0, -10, "#31D2B0"))      //background_ plane+texture
   objects.push(slct(260, -40, 90, "#FF9800")) //door1_3D
   objects.push(slct(-170, -90, 80, "#2196F3")) //door2_plane+texture
   objects.push(slct(20, 80, 150, "#4CAF50"))  //door3_plane+texture
@@ -153,7 +161,7 @@ pop()
       push()
       noStroke()
       let door1Rotate=map(mouseX,0,width,-0.7,0.5)
-      let door1MoveZ=map(mouseX,0,width,0,50)
+      let door1MoveZ=map(mouseX,0,width,10,50)
       translate(objects[1].x, objects[1].y, objects[1].z+door1MoveZ)
       rotateY(door1Rotate)
       if(objects[1].selected) {
@@ -244,6 +252,29 @@ pop()
     model(obj5)   
  pop()
 
+//---------------------------poem1 and poem2
+// rotateX(frameCount *0.01);
+// rotateY(frameCount * 0.02);
+
+push();
+noStroke()
+let poemRotate=map(mouseX,0,width,-0.1,0.1)
+let poemMoveY=map(mouseX,0,width,0,0.1)
+translate(-300, -110+poemMoveY, 100)  
+rotateY(poemMoveY)
+texture(poem1);
+plane(200,80);
+pop();
+
+push();
+noStroke()
+translate(220, 110+poemMoveY, 190) 
+rotateY(poemMoveY)
+texture(poem2);
+plane(180,40);
+pop();
+
+
 
 
 
@@ -259,8 +290,8 @@ pop()
     let d = dist(0, 0, 350, o.x, o.y, o.z)
     let xMag = dist(0, 0, 350, (mouseX-width/2)/10, (mouseY-height/2)/10, 350 - 35)
 
-    //strokeWeight(1)
-    //drawLine(0, 0, 350, (mouseX-width/2)/10 * d/xMag, (mouseY-height/2)/10 * d/xMag, 350 - 35 * d/xMag)
+    // strokeWeight(1)
+    // drawLine(0, 0, 350, (mouseX-width/2)/10 * d/xMag, (mouseY-height/2)/10 * d/xMag, 350 - 35 * d/xMag)
     push()
       translate((mouseX-width/2)/10 * d/xMag, (mouseY-height/2)/10 * d/xMag, 350 - 35 * d/xMag)
       strokeWeight(0.2)
@@ -269,9 +300,9 @@ pop()
       } else {
         o.selected = false;
       }
-      // noFill()
-      // stroke(o.color)
-      // sphere(20)
+      noFill()
+      stroke(o.color)
+      sphere(20)
     pop()
   }
   
@@ -385,8 +416,8 @@ function mousePressed() {
   for(let i=0;i<objects.length;i++){
     if(objects[i].selected==true){
       randSound.play();   
-      //window.location.href = links[i]
-      window.open(links[i])  
+      window.location.href = links[i]
+      //window.open(links[i])  
        
      }
 }
