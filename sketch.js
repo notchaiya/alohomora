@@ -80,11 +80,11 @@ function setup() {
   objects.push(slct(-280, 100, 100, "#2196F3"))  //door5_3D
 
   links.push('https://juliecst.github.io/annaRoom/')
-  links.push('https://juliecst.github.io/annaRoom/')
-  links.push('https://juliecst.github.io/annaRoom/')
-  links.push('https://juliecst.github.io/annaRoom/')
-  links.push('https://juliecst.github.io/annaRoom/')
-  links.push('https://juliecst.github.io/annaRoom/')
+  links.push('https://juliecst.github.io/artistPage/')
+  links.push('https://juliecst.github.io/celiaRoom/')
+  // links.push('https://juliecst.github.io/annaRoom/')
+  // links.push('https://juliecst.github.io/annaRoom/')
+  // links.push('https://juliecst.github.io/annaRoom/')
 
 
 }
@@ -300,9 +300,9 @@ pop();
       } else {
         o.selected = false;
       }
-      noFill()
-      stroke(o.color)
-      sphere(20)
+      // noFill()
+      // stroke(o.color)
+      // sphere(20)
     pop()
   }
   
@@ -411,7 +411,7 @@ function vecNorm(v) {
 
 function mousePressed() {
   let randSound = random(sounds);
-  let randLink = random(sounds);
+  let randLink = random(links);
 
   for(let i=0;i<objects.length;i++){
     if(objects[i].selected==true){
@@ -421,7 +421,7 @@ function mousePressed() {
 
         // Second action
         //ellipse(200, 200, 150, 150);
-        window.location.href = links[i]
+        window.location.href = randLink;
     
       }, 3000);
 
