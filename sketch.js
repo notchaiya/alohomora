@@ -70,7 +70,6 @@ function setup() {
   cam.setPosition(0, 0, 500)
   console.log(cam.eyeZ)
 
-
 //Sets the point at which objects can be selected
   objects.push(slct(0, 0, -10, "#31D2B0"))      //background_ plane+texture
   objects.push(slct(260, -40, 90, "#FF9800")) //door1_3D
@@ -79,23 +78,22 @@ function setup() {
   objects.push(slct(300,  130, 170, "#2196F3"))  //door4_plane+texture
   objects.push(slct(-280, 100, 100, "#2196F3"))  //door5_3D
 
-//put links in array
+//put links into array
   links.push('https://juliecst.github.io/annaRoom/')
   links.push('https://juliecst.github.io/artistPage/')
   links.push('https://juliecst.github.io/celiaRoom/')
+
 
 
 }
 
 function draw() {
   background(220);
-//Set the camera angle
   perspective(PI/3, width/height, 350/10, 350*10)
   
-//Turn on orbitControl can move viewing angle, just for debug and check distance between objects
+//If you turn orbitControl on, it allow you to move around in the 3D space.  
   //orbitControl(3)
- 
-  
+
   lights()
   pointLight(230, 230, 230, 300, -500, 0)
 
@@ -240,9 +238,6 @@ pop()
  pop()
 
 //---------------------------poem1 and poem2
-// rotateX(frameCount *0.01);
-// rotateY(frameCount * 0.02);
-
 push();
 noStroke()
 let poemRotate=map(mouseX,0,width,-0.1,0.1)
@@ -262,15 +257,6 @@ plane(180,40);
 pop();
 
 
-
-
-
-  // rectMode(CENTER)
-  // push()
-  //   translate(0, 0, 350-35)
-  //   fill('rgba(255, 255, 255, 0.5)')
-  //   rect(0, 0, width, height)
-  // pop()
   
   for(let i = 0; i < objects.length; i++){
     let o = objects[i]
@@ -287,6 +273,7 @@ pop();
       } else {
         o.selected = false;
       }
+
     pop()
   }
   
@@ -394,7 +381,7 @@ function vecNorm(v) {
 
 
 function mousePressed() {
-//The music played and the web page entered are different every time you click.
+//Each time you click on the door it goes to a different page and a different sound effect is played.
   let randSound = random(sounds);
   let randLink = random(links);
 
@@ -406,11 +393,14 @@ function mousePressed() {
 
         // Second action
         window.location.href = randLink;
-        // another optional way to open a new web
-        // window.open(links[i]) 
-
+    
+      //another optional way to open links
+        // window.open(links[i])  
       }, 3000);
+
       
+
+       
      }
 }
 }
