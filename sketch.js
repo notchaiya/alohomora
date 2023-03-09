@@ -104,9 +104,6 @@ function draw() {
       translate(objects[0].x, objects[0].y, objects[0].z)  
       rotateY(backgroundRotate);
       if(objects[0].selected ) {
-
-      }else {
-
       }
       texture(backgroundImg);   
         scale(0.8)
@@ -146,8 +143,6 @@ function draw() {
       rotateY(door1Rotate)
       if(objects[1].selected) {
         scale(1.1)
-      } else {
-        
       } 
         texture(door1Textur)
         scale(1.3)
@@ -165,7 +160,6 @@ function draw() {
       let planeHeight2=planeWidth2*1.3
       if(objects[2].selected ) {
         scale(1.2)
-      }else {
       }
         scale(1.1)
         texture(door2Texture);
