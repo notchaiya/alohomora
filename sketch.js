@@ -32,7 +32,7 @@ let bird;
 let desert;
 let poem1;
 let poem2;
-let key;
+
 
 
 let propCam = {
@@ -54,7 +54,7 @@ function preload() {
   desert= loadImage('desert.png')
   poem1=loadImage('poem1.png')
   poem2=loadImage('poem2.png')
-  key=loadImage('key.png')
+
 
   //sound
   sounds.push(loadSound('soundEffects/door1.wav'));
@@ -93,7 +93,6 @@ function draw() {
   
 //If you turn orbitControl on, it allow you to move around in the 3D space.  
   //orbitControl(3)
-
   lights()
   pointLight(230, 230, 230, 300, -500, 0)
 
@@ -105,11 +104,9 @@ function draw() {
       translate(objects[0].x, objects[0].y, objects[0].z)  
       rotateY(backgroundRotate);
       if(objects[0].selected ) {
-        //fill(objects[0].color)
-        //sphere(20)
+
       }else {
-        //fill(0,255,0)
-        //sphere(20)
+
       }
       texture(backgroundImg);   
         scale(0.8)
@@ -126,8 +123,7 @@ function draw() {
     rotateY(birdRotate);
     texture(bird);   
     plane(bird.width*0.5,bird.height*0.5)
-      
-   pop()
+    pop()
 
   //----------------------desert
   push()
@@ -138,8 +134,7 @@ function draw() {
   rotateY(desertRotate);
   texture(desert);   
   plane(desert.width*0.5,desert.height*0.5)
-    
-pop()
+  pop()
   
   
   //----------------------door1_3D
@@ -230,8 +225,6 @@ pop()
     scale(1.15)
   } else {
     fill(177,176,166)
-  // sphere(20)
-
   } 
     scale(0.8)
     model(obj5)   
