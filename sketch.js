@@ -67,11 +67,11 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   cam = createCamera();
-  //orig positionZ 350
   cam.setPosition(0, 0, 500)
   console.log(cam.eyeZ)
-  //angleMode(DEGREES);
-  
+
+
+//Sets the point at which objects can be selected
   objects.push(slct(0, 0, -10, "#31D2B0"))      //background_ plane+texture
   objects.push(slct(260, -40, 90, "#FF9800")) //door1_3D
   objects.push(slct(-170, -90, 80, "#2196F3")) //door2_plane+texture
@@ -79,39 +79,26 @@ function setup() {
   objects.push(slct(300,  130, 170, "#2196F3"))  //door4_plane+texture
   objects.push(slct(-280, 100, 100, "#2196F3"))  //door5_3D
 
+//put links in array
   links.push('https://juliecst.github.io/annaRoom/')
   links.push('https://juliecst.github.io/artistPage/')
   links.push('https://juliecst.github.io/celiaRoom/')
-  // links.push('https://juliecst.github.io/annaRoom/')
-  // links.push('https://juliecst.github.io/annaRoom/')
-  // links.push('https://juliecst.github.io/annaRoom/')
 
 
 }
 
 function draw() {
   background(220);
+//Set the camera angle
   perspective(PI/3, width/height, 350/10, 350*10)
   
-  
+//Turn on orbitControl can move viewing angle, just for debug and check distance between objects
   //orbitControl(3)
  
-  //need to be deleted
-  // stroke('red')
-  // line(0, 0, 200, 0)
-  // stroke('green')
-  // line(0, 0, 0, 200)
-  // stroke(0, 0,255)
-  // line(0, 0, 0, 0, 0, 200)
-  // stroke(0)
   
   lights()
   pointLight(230, 230, 230, 300, -500, 0)
-  
-  // push()
-  // strokeWeight(3)
-  // drawLine(0, 0, 350, (mouseX-width/2)/10, (mouseY-height/2)/10, 350 - 35)
-  // pop()
+
 
   //----------------------background
     push()
@@ -300,9 +287,6 @@ pop();
       } else {
         o.selected = false;
       }
-      // noFill()
-      // stroke(o.color)
-      // sphere(20)
     pop()
   }
   
@@ -410,6 +394,7 @@ function vecNorm(v) {
 
 
 function mousePressed() {
+//The music played and the web page entered are different every time you click.
   let randSound = random(sounds);
   let randLink = random(links);
 
@@ -420,15 +405,12 @@ function mousePressed() {
       setTimeout(function() {
 
         // Second action
-        //ellipse(200, 200, 150, 150);
         window.location.href = randLink;
-    
-      }, 3000);
+        // another optional way to open a new web
+        // window.open(links[i]) 
 
+      }, 3000);
       
-      // window.location.href = links[i]
-      // window.open(links[i])  
-       
      }
 }
 }
